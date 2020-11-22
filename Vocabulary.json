@@ -1,0 +1,67 @@
+[
+    {
+        "word": "lion",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/lion.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/l/lio/lion_/lion__gb_2.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/l/lio/lion_/lion__us_2.mp3"
+        ]
+    },
+    {
+        "word": "horse",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/horse.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/h/hor/horse/horse__gb_1.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hor/horse/horse__us_1.mp3"
+        ]
+    },
+    {
+        "word": "dog",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/dog.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/d/dog/dog__/dog__gb_2.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/d/dog/dog__/dog__us_1_rr.mp3"
+        ]
+    },
+    {
+        "word": "cat",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/cat.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cat/cat__/cat__gb_2.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cat/cat__/cat__us_1.mp3"
+        ]
+    },
+    {
+        "word": "pig",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/pig.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/p/pig/pig__/pig__gb_1.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/p/pig/pig__/pig__us_1.mp3"
+        ]
+    },
+    {
+        "word": "hen",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/chicken.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/h/hen/hen__/hen__gb_1.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/h/hen/hen__/hen__us_1.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/chi/chick/chicken__gb_3.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/chi/chick/chicken__us_2.mp3"
+        ]
+    },
+    {
+        "word": "cock",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/cock.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/coc/cock_/cock__gb_1.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/coc/cock_/cock__us_1.mp3"
+        ]
+    }
+]

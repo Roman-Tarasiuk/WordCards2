@@ -1,0 +1,14 @@
+[
+    {
+        "name": "animals",
+        "picturePath": "img/vocabulary/animals.png"
+    },
+    {
+        "name": "colors",
+        "picturePath": "img/vocabulary/colors.jpg"
+    },
+    {
+        "name": "family",
+        "picturePath": "img/vocabulary/family.jpg"
+    }
+]

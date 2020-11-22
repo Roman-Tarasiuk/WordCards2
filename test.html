@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Test Word Cards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="scripts/script.js"></script>
+</head>
+
+<body>
+  <div class="container" id="vocabulary">
+    <div class="row align-items-end">
+      <div class="col-sm align-bottom">
+        <div class="sound-image">
+          <img class="img-thumbnail" src="img/Lion_waiting_in_Namibia.jpg">
+        </div>
+        <div class="sound-ctrl sound" onclick="window.wordCard.playNextAudio(this.parentElement)">
+        </div>
+        <div class="sound-ctrl sound-repeat">
+        </div>
+      </div>
+      <div class="col-sm align-bottom">
+        <div class="">
+          <img class="img-thumbnail" src="img/horse.jpg">
+        </div>
+      </div>
+      <div class="col-sm align-bottom">
+        <div class="">
+          <img class="img-thumbnail" src="img/dog.jpg">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <div class="">
+
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="">
+
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button onclick="window.wordCard.test()" style="display: initial;">Category</button>
+</body>
+
+</html>

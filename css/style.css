@@ -1,0 +1,28 @@
+.list-thumbnail {
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: 20px;
+}
+
+.sound-image {
+    float: left;
+}
+
+.sound-ctrl {
+    margin-top: -41px;
+    margin-left: 6px;
+    width: 35px;
+    height: 35px;
+    float: left;
+    border: 1px solid #dddddd;
+}
+
+.sound {
+    background-image: url('../img/sound.svg');
+}
+
+.sound-repeat {
+    display: none;
+    margin-left: 43px;
+    background-image: url('../img/repeat.svg');
+}
