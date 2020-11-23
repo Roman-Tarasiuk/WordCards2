@@ -5,12 +5,6 @@ var wordCardHelper = {
         return string.charAt(0).toUpperCase() + string.slice(1);
     },
 
-    getGategory: function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const cat = urlParams.get('category');
-        return cat;
-    },
-
     fillTemplate: function(template, replacements) {
         var result = template;
 
@@ -73,36 +67,70 @@ var wordCardHelper = {
     `;
 
     var wordTemplate = `
-        <div class="col-sm align-bottom" data-audios="{{wordAudios}}" onhover="window.wordCard.onhover(this)">
-            <div class="sound-image">
+        <div class="col-sm align-bottom" data-audios="{{wordAudios}}">
+            <div class="sound-image" onmouseover="window.wordCard.onmouseover(this.parentElement)">
                 <img class="img-thumbnail" src="{{wordImage}}">
             </div>
             <div class="sound-ctrl sound" onclick="window.wordCard.playNextAudio(this.parentElement)">
             </div>
-            <div class="sound-ctrl sound-repeat">
+            <div class="sound-ctrl sound-repeat" onclick="window.wordCard.playNextAudio(this.parentElement, true)">
             </div>
+            <div class="sound-stat">1/2</div>
         </div>
     `;
 
-    wordCard.onhover = function(element) {
-        console.log('onhover...');
+    function getGategory() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const cat = urlParams.get('category');
+        return cat;
     }
 
-    wordCard.playNextAudio = function(element) {
+    function getChildElement(element, childClass) {
+        for (var i = 0; i < element.children.length; i++) {
+            if (element.children[i].classList.contains(childClass)) {
+                return element.children[i];
+            }
+        }
+
+        return null;
+    };
+
+    wordCard.onmouseover = function(element) {
+        if (element != currentElement) {
+            getChildElement(currentElement, 'sound-repeat').classList.remove('visible');
+            getChildElement(currentElement, 'sound-stat').classList.remove('visible');
+        }
+        else if (currentElement != null) {
+            getChildElement(currentElement, 'sound-repeat').classList.add('visible');
+            getChildElement(currentElement, 'sound-stat').classList.add('visible');
+        }
+    };
+
+    wordCard.playNextAudio = function(element, repeat) {
         if (currentElement != element) {
             currentElement = element;
             audios = element.dataset.audios.trim().split(/\s+/gm);
-            currentIndex = 0;
+            currentIndex = repeat ? 0 : -1;
         }
 
-        console.log('Playing ' + currentIndex + ' audio...');
-
-        var audio = new Audio(audios[currentIndex++]);
+        if (!repeat) {
+            currentIndex++;
+        }
         if (currentIndex >= audios.length) {
             currentIndex = 0;
         }
 
+        var audio = new Audio(audios[repeat ? currentIndex : currentIndex]);
+
+        console.log('Playing ' + currentIndex + ' audio...');
         audio.play();
+        getChildElement(currentElement, 'sound-repeat').classList.add('visible');
+
+        // Show statistics.
+        var statInfo = (currentIndex + 1) + '/' + audios.length;
+        var statEl = getChildElement(currentElement, 'sound-stat');
+        statEl.innerHTML = statInfo;
+        statEl.classList.add('visible');
     };
 
     wordCard.listCategories = function() {
@@ -122,12 +150,12 @@ var wordCardHelper = {
         resultStr += '</ul>';
 
         document.getElementById('categoriesList').innerHTML = resultStr;
-    }
+    };
 
     wordCard.listVocabulary = function(perRow) {
         console.log('Listing vocabulary...');
 
-        var category = wordCardHelper.getGategory();
+        var category = getGategory();
 
         document.title = 'Word Cards - ' + category;
 
@@ -137,7 +165,7 @@ var wordCardHelper = {
         wordCardHelper.shuffle(vocabulary);
 
         for (var i = 0; i < vocabulary.length; i += perRow) {
-            resultStr += '<div class="row align-items-end">\n';
+            resultStr += '<br><div class="row align-items-end">\n';
 
             for (var j = 0; j < perRow; j++) {
                 if (i + j < vocabulary.length) {
@@ -155,7 +183,7 @@ var wordCardHelper = {
         }
 
         document.getElementById('vocabulary').innerHTML = resultStr;
-    }
+    };
 
     wordCard.importCategories = async function(event) {
         console.log('Importing from file...');
@@ -164,7 +192,7 @@ var wordCardHelper = {
         var vocabulary = JSON.parse(text);
 
         repository.saveCategories(JSON.stringify(vocabulary));
-    }
+    };
 
     wordCard.importVocabulary = async function(event) {
         console.log('Importing from file...');
@@ -173,7 +201,7 @@ var wordCardHelper = {
         var vocabulary = JSON.parse(text);
 
         repository.saveVocabulary(JSON.stringify(vocabulary));
-    }
+    };
 
     wordCard.test = function() {
         console.log('Settings...');
@@ -181,7 +209,7 @@ var wordCardHelper = {
         var vocabulary = repository.getVocabulary();
 
         console.log(JSON.stringify(vocabulary));
-    }
+    };
 
     window.wordCard = wordCard;
 

@@ -22,7 +22,17 @@
 }
 
 .sound-repeat {
-    display: none;
+    visibility: hidden;
     margin-left: 43px;
     background-image: url('../img/repeat.svg');
+}
+
+.sound-stat {
+    visibility: hidden;
+    float: right;
+    margin-top: -43px;
+    margin-right: 9px;
+    font-size: 1.5em;
+    color: #dddddd;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

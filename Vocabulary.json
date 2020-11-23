@@ -63,5 +63,23 @@
             "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/coc/cock_/cock__gb_1.mp3",
             "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/coc/cock_/cock__us_1.mp3"
         ]
+    },
+    {
+        "word": "elephant",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/elephant.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/e/ele/eleph/elephant__gb_1.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/e/ele/eleph/elephant__us_1.mp3"
+        ]
+    },
+    {
+        "word": "cow",
+        "categories": ["animals"],
+        "picture": "img/vocabulary/cow.jpg",
+        "pronunciations": [
+            "https://www.oxfordlearnersdictionaries.com/media/english/uk_pron/c/cow/cow__/cow__gb_1.mp3",
+            "https://www.oxfordlearnersdictionaries.com/media/english/us_pron/c/cow/cow__/cow__us_1.mp3"
+        ]
     }
 ]
