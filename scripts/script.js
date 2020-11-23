@@ -121,10 +121,11 @@ var wordCardHelper = {
             currentIndex = 0;
         }
 
-        var audio = new Audio(audios[repeat ? currentIndex : currentIndex]);
+        var audio = new Audio(audios[currentIndex]);
 
         console.log('Playing ' + currentIndex + ' audio...');
         audio.play();
+
         getChildElement(currentElement, 'sound-repeat').classList.add('visible');
 
         // Show statistics.
