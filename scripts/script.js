@@ -67,15 +67,15 @@ var wordCardHelper = {
     `;
 
     var wordTemplate = `
-        <div class="col-sm align-bottom" data-audios="{{wordAudios}}">
-            <div class="sound-image" onmouseover="window.wordCard.onmouseover(this.parentElement)">
+        <div class="col-sm align-bottom" data-audios="{{wordAudios}}"
+                onmouseover="window.wordCard.onmouseover(this)"
+                onmouseleave="window.wordCard.onmouseleave(this)">
+            <div class="sound-image">
                 <img class="img-thumbnail" src="{{wordImage}}">
             </div>
-            <div class="sound-ctrl sound" onclick="window.wordCard.playNextAudio(this.parentElement)">
-            </div>
-            <div class="sound-ctrl sound-repeat" onclick="window.wordCard.playNextAudio(this.parentElement, true)">
-            </div>
-            <div class="sound-stat">1/2</div>
+            <div class="sound-ctrl sound" onclick="window.wordCard.playNextAudio(this.parentElement)"></div>
+            <div class="sound-ctrl sound-repeat" onclick="window.wordCard.playNextAudio(this.parentElement, true)"></div>
+            <div class="sound-stat"></div>
         </div>
     `;
 
@@ -96,14 +96,15 @@ var wordCardHelper = {
     };
 
     wordCard.onmouseover = function(element) {
-        if (element != currentElement) {
-            getChildElement(currentElement, 'sound-repeat').classList.remove('visible');
-            getChildElement(currentElement, 'sound-stat').classList.remove('visible');
+        if (element == currentElement) {
+            getChildElement(element, 'sound-repeat').classList.add('visible');
+            getChildElement(element, 'sound-stat').classList.add('visible');
         }
-        else if (currentElement != null) {
-            getChildElement(currentElement, 'sound-repeat').classList.add('visible');
-            getChildElement(currentElement, 'sound-stat').classList.add('visible');
-        }
+    };
+
+    wordCard.onmouseleave = function(element) {
+        getChildElement(element, 'sound-repeat').classList.remove('visible');
+        getChildElement(element, 'sound-stat').classList.remove('visible');
     };
 
     wordCard.playNextAudio = function(element, repeat) {
