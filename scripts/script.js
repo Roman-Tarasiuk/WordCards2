@@ -213,6 +213,8 @@ var wordCardHelper = {
         console.log(JSON.stringify(vocabulary));
     };
 
+    //
+
     window.wordCard = wordCard;
 
 })({ // Repository.
