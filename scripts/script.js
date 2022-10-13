@@ -48,7 +48,7 @@ var wordCardHelper = {
     }
 };
 
-(function init(repository) {
+(function init(parms) {
     var wordCard = {};
 
     var currentElement = null;
@@ -139,7 +139,7 @@ var wordCardHelper = {
         console.log('Creating categories...');
 
         var resultStr = '<ul class="list-group">\n';
-        var categories = repository.getCategories();
+        var categories = parms.repository.getCategories();
 
         for (var i = 0; i < categories.length; i++) {
             resultStr += wordCardHelper.fillTemplate(categoryTemplate, [
@@ -162,9 +162,12 @@ var wordCardHelper = {
         document.title = 'Word Cards - ' + category;
 
         var resultStr = '';
-        var vocabulary = repository.getVocabulary()
+        var vocabulary = parms.repository.getVocabulary()
                 .filter(entry => entry.categories.indexOf(category) != -1);
-        wordCardHelper.shuffle(vocabulary);
+        
+        if (parms.repository.getShuffle()) {
+            wordCardHelper.shuffle(vocabulary);
+        }
 
         for (var i = 0; i < vocabulary.length; i += perRow) {
             resultStr += '<br><div class="row align-items-end">\n';
@@ -193,7 +196,7 @@ var wordCardHelper = {
         var text = await wordCardHelper.openFile(event);
         var vocabulary = JSON.parse(text);
 
-        repository.saveCategories(JSON.stringify(vocabulary));
+        parms.repository.saveCategories(JSON.stringify(vocabulary));
     };
 
     wordCard.importVocabulary = async function(event) {
@@ -202,13 +205,18 @@ var wordCardHelper = {
         var text = await wordCardHelper.openFile(event);
         var vocabulary = JSON.parse(text);
 
-        repository.saveVocabulary(JSON.stringify(vocabulary));
+        parms.repository.saveVocabulary(JSON.stringify(vocabulary));
     };
+
+    wordCard.shuffleChange = function() {
+        var shuffle = document.getElementById('chkShuffle').checked;
+        parms.repository.saveShuffle(shuffle);
+    }
 
     wordCard.test = function() {
         console.log('Settings...');
 
-        var vocabulary = repository.getVocabulary();
+        var vocabulary = parms.repository.getVocabulary();
 
         console.log(JSON.stringify(vocabulary));
     };
@@ -217,48 +225,63 @@ var wordCardHelper = {
 
     window.wordCard = wordCard;
 
-})({ // Repository.
+})({
+    repository: {
 
-    getCategories: function() {
-        return JSON.parse(localStorage.getItem('categories'));
-    },
+        getCategories: function() {
+            return JSON.parse(localStorage.getItem('categories'));
+        },
 
-    getVocabulary: function() {
-        return JSON.parse(localStorage.getItem('vocabulary'));
-    },
+        saveCategories: function(text) {
+            localStorage.setItem('categories', text);
+        },
 
-    saveCategories: function(text) {
-        localStorage.setItem('categories', text);
-    },
+        getVocabulary: function() {
+            return JSON.parse(localStorage.getItem('vocabulary'));
+        },
 
-    saveVocabulary: function(text) {
-        localStorage.setItem('vocabulary', text);
-    },
+        saveVocabulary: function(text) {
+            localStorage.setItem('vocabulary', text);
+        },
 
-    check: function() {
-        var categories = this.getCategories();
-        var categoryNames = [];
+        getShuffle: function() {
+            var shuffle = localStorage.getItem('shuffle');
+            if (shuffle === null) {
+                this.saveShuffle(false);
+                return false;
+            }
+            return JSON.parse(shuffle);
+        },
 
-        for (var i = 0; i < categories.length; i++) {
-            categoryNames.push(categories[i].name);
-        }
+        saveShuffle: function(shuffle) {
+            localStorage.setItem('shuffle', shuffle);
+        },
 
-        var vocabulary = this.getVocabulary();
-        var categoriesVoc = [];
+        check: function() {
+            var categories = this.getCategories();
+            var categoryNames = [];
 
-        for (var i = 0; i < vocabulary.length; i++) {
-            for (var j = 0; j < vocabulary[i].categories.length; j++) {
-                if (categoriesVoc.indexOf(vocabulary[i].categories[j]) < 0) {
-                    categoriesVoc.push(vocabulary[i].categories[j]);
+            for (var i = 0; i < categories.length; i++) {
+                categoryNames.push(categories[i].name);
+            }
+
+            var vocabulary = this.getVocabulary();
+            var categoriesVoc = [];
+
+            for (var i = 0; i < vocabulary.length; i++) {
+                for (var j = 0; j < vocabulary[i].categories.length; j++) {
+                    if (categoriesVoc.indexOf(vocabulary[i].categories[j]) < 0) {
+                        categoriesVoc.push(vocabulary[i].categories[j]);
+                    }
                 }
             }
-        }
 
-        // Check.
+            // Check.
 
-        for (var i = 0; i < categoriesVoc.length; i++) {
-            if (categoryNames.indexOf(categoriesVoc[i]) == -1) {
-                console.log('Category not found: ' + categoriesVoc[i]);
+            for (var i = 0; i < categoriesVoc.length; i++) {
+                if (categoryNames.indexOf(categoriesVoc[i]) == -1) {
+                    console.log('Category not found: ' + categoriesVoc[i]);
+                }
             }
         }
     }
