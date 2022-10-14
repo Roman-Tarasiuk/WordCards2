@@ -1,4 +1,4 @@
 img/vocabulary/
 node_modules/bootstrap/
-./Vocabulary.json
-./Categories.json
+Vocabulary.json
+Categories.json
