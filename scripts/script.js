@@ -58,12 +58,12 @@ var wordCardHelper = {
     //
 
     var categoryTemplate = `
-        <li class="list-group-item">
+        <div class="col-sm">
             <a href="list-category.html?category={{categoryName}}">
                 <img src="{{categoryPicture}}" class="list-thumbnail">
                 <h3>{{caregoryTitle}}</h3>
             </a>
-        </li>
+        </div>
     `;
 
     var wordTemplate = `
@@ -135,21 +135,30 @@ var wordCardHelper = {
         statEl.classList.add('visible');
     };
 
-    wordCard.listCategories = function() {
+    wordCard.listCategories = function(perRow) {
         console.log('Creating categories...');
 
-        var resultStr = '<ul class="list-group">\n';
         var categories = parms.repository.getCategories();
 
-        for (var i = 0; i < categories.length; i++) {
-            resultStr += wordCardHelper.fillTemplate(categoryTemplate, [
-                'categoryName',    categories[i].name,
-                'categoryPicture', categories[i].picturePath,
-                'caregoryTitle',   wordCardHelper.capitalizeFirstLetter(categories[i].name)
-            ]);
+        var resultStr = '<div>\n';
+
+        for (var i = 0; i < categories.length; i += perRow) {
+            resultStr += '    <div class="row">';
+
+            for (var j = 0; j < perRow; j++) {
+                if (i + j < categories.length) {
+                    resultStr += wordCardHelper.fillTemplate(categoryTemplate, [
+                        'categoryName',    categories[i+j].name,
+                        'categoryPicture', categories[i+j].picturePath,
+                        'caregoryTitle',   wordCardHelper.capitalizeFirstLetter(categories[i+j].name)
+                    ]);
+                }
+            }
+
+            resultStr += '</div>\n';
         }
 
-        resultStr += '</ul>';
+        resultStr += '</div>';
 
         document.getElementById('categoriesList').innerHTML = resultStr;
     };
