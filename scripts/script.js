@@ -58,11 +58,13 @@ var wordCardHelper = {
     //
 
     var categoryTemplate = `
-        <div class="col-sm">
+        <div class="col-sm bottom-p">
+            <div class="bottom">
             <a href="list-category.html?category={{categoryName}}">
                 <img src="{{categoryPicture}}" class="list-thumbnail">
                 <h3>{{caregoryTitle}}</h3>
             </a>
+            </div>
         </div>
     `;
 

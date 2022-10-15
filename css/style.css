@@ -3,6 +3,17 @@
     max-height: 200px;
 }
 
+.bottom-p {
+    display: flex;
+    margin: 5px;
+}
+
+.bottom {
+    margin-top: auto;
+    border: 1px solid rgb(230, 230, 230);
+    padding: 15px;
+}
+
 .sound-image {
     float: left;
 }
