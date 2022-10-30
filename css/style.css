@@ -15,7 +15,7 @@
 }
 
 .sound-image {
-    float: left;
+    /* float: left; */
 }
 
 .sound-ctrl {
@@ -25,9 +25,11 @@
     height: 35px;
     float: left;
     border: 1px solid #dddddd;
+    position: absolute;
 }
 
 .sound {
+    float: left;
     background-image: url('../img/sound.svg');
 }
 
@@ -41,8 +43,10 @@
     visibility: hidden;
     float: right;
     margin-top: -43px;
+    margin-left: 160px;
     margin-right: 9px;
     font-size: 1.5em;
     color: #dddddd;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    position: absolute;
 }
